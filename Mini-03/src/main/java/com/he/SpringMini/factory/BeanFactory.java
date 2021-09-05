@@ -2,7 +2,6 @@ package com.he.SpringMini.factory;
 
 
 import com.he.SpringMini.BeanException;
-import javafx.beans.binding.ObjectExpression;
 
 public interface BeanFactory {
     /**

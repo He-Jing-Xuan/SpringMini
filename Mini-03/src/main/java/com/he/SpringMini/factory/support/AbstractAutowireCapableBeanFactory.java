@@ -2,7 +2,11 @@ package com.he.SpringMini.factory.support;
 
 
 import com.he.SpringMini.BeanException;
+import com.he.SpringMini.PropertyValue;
+import com.he.SpringMini.PropertyValues;
 import com.he.SpringMini.factory.config.BeanDefinition;
+import com.he.SpringMini.factory.config.BeanReference;
+import org.apache.commons.beanutils.BeanUtils;
 
 import java.lang.reflect.Constructor;
 
@@ -18,6 +22,9 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         Object bean = null;
         try {
             bean = createBeanInstance(beanDefinition, beanName, args);
+            System.out.println(bean);
+            //填充属性
+            applyPropertyValues(beanName, bean, beanDefinition);
         } catch (Exception e) {
             throw new BeanException("Instantiation of bean failed", e);
         }
@@ -40,6 +47,34 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         }
         // 创建bean
         return getInstantiationStrategy().instantiate(beanDefinition, beanName, constructor, args);
+    }
+
+    /**
+     * 填充对象属性
+     *
+     * @param beanName
+     * @param bean
+     * @param beanDefinition
+     */
+    protected void applyPropertyValues(String beanName, Object bean, BeanDefinition beanDefinition) {
+        try {
+            PropertyValues propertyValues = beanDefinition.getPropertyValues();
+            for (PropertyValue propertyValue : propertyValues.getPropertyValues()) {
+
+                String name = propertyValue.getName();
+                Object value = propertyValue.getValue();
+
+                if (value instanceof BeanReference) {
+                    // A 依赖 B，获取 B 的实例化
+                    BeanReference beanReference = (BeanReference) value;
+                    value = getBean(beanReference.getBeanName());
+                }
+                // 属性填充
+                BeanUtils.setProperty(bean, name, value);
+            }
+        } catch (Exception e) {
+            throw new BeanException("Error setting property values：" + beanName);
+        }
     }
 
     public InstantiationStrategy getInstantiationStrategy() {
