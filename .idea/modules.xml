@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Mini-01/Mini-01.iml" filepath="$PROJECT_DIR$/Mini-01/Mini-01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Mini-02/Mini-02.iml" filepath="$PROJECT_DIR$/Mini-02/Mini-02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Mini-03/Mini-03.iml" filepath="$PROJECT_DIR$/Mini-03/Mini-03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SpringMini.iml" filepath="$PROJECT_DIR$/.idea/SpringMini.iml" />
+    </modules>
+  </component>
+</project>

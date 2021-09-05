@@ -13,11 +13,11 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         Object bean = null;
         try {
             bean = beanDefinition.getBeanClass().newInstance();
-        }catch (InstantiationException | IllegalAccessException e){
+        } catch (InstantiationException | IllegalAccessException e) {
             throw new BeanException("Instantiation of bean failed", e);
         }
         // 加入到缓存中
-        addSingleton(beanName,bean);
+        addSingleton(beanName, bean);
         return bean;
     }
 }
