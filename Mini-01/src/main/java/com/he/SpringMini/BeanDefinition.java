@@ -1,7 +1,5 @@
 package com.he.SpringMini;
 
-import javafx.beans.binding.ObjectExpression;
-
 public class BeanDefinition {
     private Object bean;
     public BeanDefinition(Object bean) {
