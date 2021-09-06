@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Mini-04" />
         <module name="Mini-03" />
         <module name="Mini-02" />
         <module name="Mini-01" />
@@ -15,6 +16,7 @@
       <module name="Mini-01" target="1.5" />
       <module name="Mini-02" target="1.5" />
       <module name="Mini-03" target="8" />
+      <module name="Mini-04" target="8" />
       <module name="SpringMini" target="8" />
     </bytecodeTargetLevel>
   </component>
