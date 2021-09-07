@@ -3,13 +3,19 @@ package con.he.SpringMini.beans.factory.support;
 
 import con.he.SpringMini.beans.BeanException;
 import con.he.SpringMini.beans.factory.BeanFactory;
+import con.he.SpringMini.beans.factory.ConfigurableBeanFactory;
 import con.he.SpringMini.beans.factory.config.BeanDefinition;
+import con.he.SpringMini.beans.factory.config.BeanPostProcessor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * AbstractBeanFactory 继承了父类的 单列bean的获取方法getSingleton。
  * 实现BeanFactory 的getBean的方法。来获取单列。
  */
-public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements BeanFactory {
+public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements ConfigurableBeanFactory {
+    private final List<BeanPostProcessor> beanPostProcessors = new ArrayList<>();
 
     @Override
     public Object getBean(String name) throws BeanException {
@@ -23,7 +29,7 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
 
     @Override
     public <T> T getBean(String name, Class<T> requiredType) {
-        return  null;
+        return  (T)getBean(name);
     }
 
     protected <T> T doGetBean(final String name, final Object[] args) {
@@ -41,4 +47,19 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
 
 
     protected abstract Object createBean(String beanName, BeanDefinition beanDefinition, Object[] args) throws BeanException;
+
+
+    @Override
+    public void addBeanPostProcessor(BeanPostProcessor beanPostProcessor) {
+        this.beanPostProcessors.remove(beanPostProcessor);
+        this.beanPostProcessors.add(beanPostProcessor);
+    }
+
+    /**
+     * Return the list of BeanPostProcessors that will get applied
+     * to beans created with this factory.
+     */
+    public List<BeanPostProcessor> getBeanPostProcessors() {
+        return this.beanPostProcessors;
+    }
 }
