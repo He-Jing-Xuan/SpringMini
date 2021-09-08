@@ -3,12 +3,14 @@ package con.he.SpringMini.beans.factory.support;
 
 import con.he.SpringMini.beans.BeanException;
 import con.he.SpringMini.beans.factory.ConfigurableBeanFactory;
+import con.he.SpringMini.beans.factory.DisposableBean;
 import con.he.SpringMini.beans.factory.config.BeanDefinition;
 import con.he.SpringMini.beans.factory.config.BeanPostProcessor;
 import con.he.SpringMini.beans.factory.config.ConfigurableListableBeanFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFactory implements BeanDefinitionRegistry, ConfigurableListableBeanFactory {
     private Map<String, BeanDefinition> beanDefinitionMap = new HashMap<>();
@@ -36,10 +38,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
         return beanDefinitionMap.containsKey(beanName);
     }
 
-    @Override
-    public void destrySingletons() {
 
-    }
 
     @Override
     public <T> Map<String, T> getBeansOfType(Class<T> type) throws BeanException {
