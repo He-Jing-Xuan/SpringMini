@@ -2,15 +2,49 @@ package con.he.SpringMini.beans.factory.config;
 
 
 import con.he.SpringMini.beans.PropertyValues;
+import con.he.SpringMini.beans.factory.ConfigurableBeanFactory;
 
 /**
  * bean的定义
  */
 public class BeanDefinition {
+    String SCOPE_SINGLETON = ConfigurableBeanFactory.SCOPE_SINGLETON;
+
+    String SCOPE_PROTOTYPE = ConfigurableBeanFactory.SCOPE_PROTOTYPE;
     private Class beanClass;
     private PropertyValues propertyValues;
     private String initMethodName;
     private String destoryMethodName;
+
+    private String scope = SCOPE_SINGLETON;
+
+    private boolean singleton = true;
+
+    private boolean prototype = false;
+
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
+
+    public boolean isSingleton() {
+        return scope == SCOPE_SINGLETON;
+    }
+
+    public void setSingleton(boolean singleton) {
+        this.singleton = singleton;
+    }
+
+    public boolean isPrototype() {
+        return prototype;
+    }
+
+    public void setPrototype(boolean prototype) {
+        this.prototype = prototype;
+    }
 
     public BeanDefinition(Class beanClass) {
         this.beanClass = beanClass;

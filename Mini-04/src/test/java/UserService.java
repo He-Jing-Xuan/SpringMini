@@ -30,9 +30,9 @@ public class UserService implements InitializingBean, DisposableBean, BeanNameAw
         this.beanFactory = beanFactory;
     }
 
-    private UserDao userDao;
+    private IUUserDao userDao;
 
-    public UserService(String uId, UserDao userDao) {
+    public UserService(String uId, IUUserDao userDao) {
         this.uId = uId;
         this.userDao = userDao;
     }
@@ -49,11 +49,11 @@ public class UserService implements InitializingBean, DisposableBean, BeanNameAw
         this.uId = uId;
     }
 
-    public UserDao getUserDao() {
+    public IUUserDao getUserDao() {
         return userDao;
     }
 
-    public void setUserDao(UserDao userDao) {
+    public void setUserDao(IUUserDao userDao) {
         this.userDao = userDao;
     }
 

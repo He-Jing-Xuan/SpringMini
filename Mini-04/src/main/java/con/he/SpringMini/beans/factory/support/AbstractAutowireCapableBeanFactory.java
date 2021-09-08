@@ -38,8 +38,11 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         }
         //  注册  实现了 Disposable接口的bean对象
         registerDispossableBeanIfNecessary(beanName,bean,beanDefinition);
-        // 加入到缓存中
-        addSingleton(beanName, bean);
+        // 如果是单列模式
+        //  单例模式 会放入内存中， 而原型模式则不会，每次获取创建新的对象。
+        if(beanDefinition.isSingleton()){
+            addSingleton(beanName, bean);
+        }
         return bean;
     }
 
@@ -173,6 +176,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
     }
     protected void registerDispossableBeanIfNecessary(String beanName,Object bean, BeanDefinition beanDefinition){
+        // 原型模式不进行bena的销毁
+        if(!beanDefinition.isSingleton())return;
         if (bean instanceof DisposableBean || StrUtil.isNotEmpty(beanDefinition.getDestoryMethodName())) {
                registerDisposableBean(beanName,new DisposableBeanAdapter(bean,beanName,beanDefinition));
         }

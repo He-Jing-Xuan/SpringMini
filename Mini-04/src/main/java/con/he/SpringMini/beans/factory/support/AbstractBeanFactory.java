@@ -4,6 +4,7 @@ package con.he.SpringMini.beans.factory.support;
 import con.he.SpringMini.beans.BeanException;
 import con.he.SpringMini.beans.factory.BeanFactory;
 import con.he.SpringMini.beans.factory.ConfigurableBeanFactory;
+import con.he.SpringMini.beans.factory.FactoryBean;
 import con.he.SpringMini.beans.factory.config.BeanDefinition;
 import con.he.SpringMini.beans.factory.config.BeanPostProcessor;
 
@@ -13,8 +14,11 @@ import java.util.List;
 /**
  * AbstractBeanFactory 继承了父类的 单列bean的获取方法getSingleton。
  * 实现BeanFactory 的getBean的方法。来获取单列。
+ * 修改：AbstractBeanFactory 原来 继承 DefaultSingletonBeanRegistry 。
+ * 现在修改成 FactoryBeanRegistrySupport  因为 FactoryBeanRegistrySupport  继承了 DefaultSingletonBeanRegistry， 实现了 FactoryBean的扩展
+ *
  */
-public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements ConfigurableBeanFactory {
+public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport implements ConfigurableBeanFactory {
     private final List<BeanPostProcessor> beanPostProcessors = new ArrayList<>();
 
     @Override
@@ -33,13 +37,15 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
     }
 
     protected <T> T doGetBean(final String name, final Object[] args) {
-        Object bean = getSingleton(name);
-        if (bean != null) {
-            return (T) bean;
+        Object sharedInstance = getSingleton(name);
+        if (sharedInstance != null) {
+            return (T) getObjectForBeanInstance(sharedInstance,name);
         }
 
         BeanDefinition beanDefinition = getBeanDefinition(name);
-        return (T) createBean(name, beanDefinition, args);
+
+        Object bean = createBean(name,beanDefinition,args);
+        return (T) getObjectForBeanInstance(bean,name);
     }
 
     // 定义 抽象的 方法， 具体实现由子类实现
@@ -61,5 +67,22 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
      */
     public List<BeanPostProcessor> getBeanPostProcessors() {
         return this.beanPostProcessors;
+    }
+
+    /**
+     * 获取bean对象； 普通的bean  和factoryBean
+     * @param beanInstance
+     * @param beanName
+     * @return
+     */
+    private Object getObjectForBeanInstance(Object beanInstance,String beanName){
+        if(!(beanInstance instanceof FactoryBean))
+            return beanInstance;
+        Object object = getCachedObjectForFactoryBean(beanName);
+        if(object == null){
+            FactoryBean<?> factoryBean = (FactoryBean<?>) beanInstance;
+            object = getObjectFromFactoryBean(factoryBean,beanName);
+        }
+        return  object;
     }
 }
