@@ -2,14 +2,14 @@ package com.he.SpringMini.factory.support;
 
 import com.he.SpringMini.BeanException;
 import com.he.SpringMini.factory.config.BeanDefinition;
-import org.springframework.beans.BeansException;
+
 
 /**
  * 创建bean  并加入到缓存中
  */
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory {
     @Override
-    protected Object createBean(String beanName, BeanDefinition beanDefinition) throws BeansException {
+    protected Object createBean(String beanName, BeanDefinition beanDefinition) throws BeanException {
         Object bean = null;
         try {
             bean = beanDefinition.getBeanClass().newInstance();

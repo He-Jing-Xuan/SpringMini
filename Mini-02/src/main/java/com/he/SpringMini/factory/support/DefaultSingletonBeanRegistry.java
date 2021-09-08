@@ -2,11 +2,12 @@ package com.he.SpringMini.factory.support;
 
 import com.he.SpringMini.factory.config.SingletonBeanRegistry;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
-    private Map<String, Object> singleObejcts = new HashMap<>();
+    private Map<String, Object> singleObejcts = new HashMap<String, Object>();
 
 
     @Override
