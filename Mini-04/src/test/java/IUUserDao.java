@@ -5,4 +5,6 @@
  */
 public interface IUUserDao {
     String queryUserName(String uId);
+
+    String register(String userName);
 }

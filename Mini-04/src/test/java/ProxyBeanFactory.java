@@ -1,4 +1,4 @@
-import con.he.SpringMini.beans.factory.FactoryBean;
+import com.he.SpringMini.beans.factory.FactoryBean;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
