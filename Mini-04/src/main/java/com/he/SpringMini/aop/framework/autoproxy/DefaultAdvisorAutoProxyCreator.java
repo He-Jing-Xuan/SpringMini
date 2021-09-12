@@ -7,6 +7,7 @@ import com.he.SpringMini.aop.TargetSource;
 import com.he.SpringMini.aop.aspectj.AspectJExpressionPointcutAdvior;
 import com.he.SpringMini.aop.framework.ProxyFactory;
 import com.he.SpringMini.beans.BeanException;
+import com.he.SpringMini.beans.PropertyValues;
 import com.he.SpringMini.beans.factory.BeanFactory;
 import com.he.SpringMini.beans.factory.BeanFactoryAware;
 import com.he.SpringMini.beans.factory.config.InstantiationAwareBeanPostProcessor;
@@ -65,6 +66,12 @@ public class DefaultAdvisorAutoProxyCreator implements InstantiationAwareBeanPos
         }
         return null;
     }
+
+    @Override
+    public PropertyValues postProcessPropertyValues(PropertyValues pvs, Object bean, String beanName) throws BeanException {
+        return null;
+    }
+
     private boolean isInfrastructureClass(Class<?> beanClass){
         return Advice.class.isAssignableFrom(beanClass) || Pointcut.class.isAssignableFrom(beanClass) || Advisor.class.isAssignableFrom(beanClass);
     }
