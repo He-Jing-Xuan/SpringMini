@@ -71,6 +71,12 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         }
     }
 
+    /**
+     * 加载配置文件， 解析bean，并注册到工厂中。
+     * @param inputStream
+     * @throws ClassNotFoundException
+     * @throws DocumentException
+     */
     protected void doLoadBeanDefinitions(InputStream inputStream) throws ClassNotFoundException, DocumentException {
         SAXReader saxReader = new SAXReader();
         Document doc = saxReader.read(inputStream);

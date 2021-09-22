@@ -8,6 +8,7 @@ package com.he.SpringMini.core.io;
 public interface ResourceLoader {
     /**
      * Pseudo URL prefix for loading from the class path: "classpath:"
+     * 定义路径前缀
      */
     String CLASSPATH_URL_PREFIX = "classpath:";
 

@@ -29,6 +29,10 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
      */
     protected abstract void loadBeanDefinitions(DefaultListableBeanFactory beanFactory);
 
+    /**
+     * 创建bean工厂 只是直接new了一个 工厂罢了
+     * @return
+     */
     private DefaultListableBeanFactory createBeanFactory(){
         return new DefaultListableBeanFactory();
     }

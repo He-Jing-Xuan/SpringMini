@@ -9,6 +9,7 @@ import com.he.SpringMini.core.io.ResourceLoader;
  * @Version 1.0
  */
 public abstract class AbstractBeanDefinitionReader implements BeanDefinitionReader {
+
      private final BeanDefinitionRegistry registry;
 
      private ResourceLoader resourceLoader;
@@ -21,6 +22,11 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
         this.registry = registry;
         this.resourceLoader = resourceLoader;
     }
+
+    /**
+     * 获取bean定义的 注册map
+     * @return
+     */
     @Override
     public BeanDefinitionRegistry getRegistry() {
         return registry;

@@ -8,6 +8,9 @@ import com.he.SpringMini.factory.config.BeanDefinition;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * DefaultListableBeanFactory 使用一个map 存了 beanDefinition即=即bean的定义相关的东西。
+ */
 public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFactory implements BeanDefinitionRegistry {
     private Map<String, BeanDefinition> beanDefinitionMap = new HashMap<String,BeanDefinition>();
 

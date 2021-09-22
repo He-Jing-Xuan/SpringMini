@@ -22,7 +22,6 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         Object bean = null;
         try {
             bean = createBeanInstance(beanDefinition, beanName, args);
-            System.out.println(bean);
             //填充属性
             applyPropertyValues(beanName, bean, beanDefinition);
         } catch (Exception e) {
@@ -33,6 +32,13 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         return bean;
     }
 
+    /**
+     * 有参数构造函数 的 bean 的创建  根据传入的参数  匹配到对应的构造函数
+     * @param beanDefinition
+     * @param beanName
+     * @param args
+     * @return
+     */
     protected Object createBeanInstance(BeanDefinition beanDefinition, String beanName, Object[] args) {
         Constructor constructor = null;
         Class<?> beanClass = beanDefinition.getBeanClass();
@@ -81,7 +87,5 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         return instantiationStrategy;
     }
 
-    public void setInstantiationStrategy(InstantiationStrategy instantiationStrategy) {
-        this.instantiationStrategy = instantiationStrategy;
-    }
+
 }

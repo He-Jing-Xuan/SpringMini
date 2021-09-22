@@ -44,6 +44,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
         getBeanFactory().destrySingletons();
     }
 
+    /**
+     * 创建bean工厂
+     * 加载配置文件
+     * @throws BeanException
+     */
     protected abstract void refreshBeanFactory() throws BeanException;
 
     protected abstract ConfigurableListableBeanFactory getBeanFactory();
