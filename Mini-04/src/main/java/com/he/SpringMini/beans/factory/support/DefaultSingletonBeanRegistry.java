@@ -54,6 +54,10 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
 
     /**
      * 销毁 实现了  disposableBean 接口的单例。
+     * 实现 ConfigurableBeanFactory 接口定义的 destroySingletons 方法
+     * 可以看到 DefaultSingletonBeanRegistry 并没有实现ConfigurableBeanFactory，
+     * 而是由子类AbstractBeanFactory实现。
+     * AbstractBeanFactory把实现接口的操作又交给继承的父类处理。所以这块还是蛮有意思的，是一种不错的隔离分层服务的设计方式
      */
     public void destrySingletons() {
         Set<String> keySet = this.disposableBeans.keySet();

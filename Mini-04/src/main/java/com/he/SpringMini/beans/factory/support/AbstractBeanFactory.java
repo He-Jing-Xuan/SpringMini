@@ -75,8 +75,10 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
      * @return
      */
     private Object getObjectForBeanInstance(Object beanInstance,String beanName){
+        // 如果没有实现 FactoryBean 就直接 返回
         if(!(beanInstance instanceof FactoryBean))
             return beanInstance;
+        // 如果实现了  就去 FactoryBean 中获取。
         Object object = getCachedObjectForFactoryBean(beanName);
         if(object == null){
             FactoryBean<?> factoryBean = (FactoryBean<?>) beanInstance;

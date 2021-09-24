@@ -8,9 +8,10 @@ import com.he.SpringMini.beans.factory.config.BeanDefinition;
 import java.lang.reflect.Method;
 
 /**
- * @Author tal
+ * @Author he-jing-xuan
  * @Date 2021/9/7 4:43 下午
  * @Version 1.0
+ * 实现销毁接口。  通过接口实现或者 配置文件实现。
  */
 public class DisposableBeanAdapter implements DisposableBean {
     private final Object bean;
