@@ -2,7 +2,7 @@ package com.he.SpringMini.aop.framework.autoproxy;
 
 import com.he.SpringMini.aop.AdvisedSupport;
 import com.he.SpringMini.aop.Advisor;
-import com.he.SpringMini.aop.ClassFilter;
+import com.he.SpringMini.aop.filter.ClassFilter;
 import com.he.SpringMini.aop.TargetSource;
 import com.he.SpringMini.aop.aspectj.AspectJExpressionPointcutAdvior;
 import com.he.SpringMini.aop.framework.ProxyFactory;

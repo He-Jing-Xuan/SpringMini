@@ -1,6 +1,8 @@
-package com.he.SpringMini.aop.framework;
+package com.he.SpringMini.aop.framework.proxy;
 
 import com.he.SpringMini.aop.AdvisedSupport;
+import com.he.SpringMini.aop.framework.ReflectiveMethodInvocation;
+import com.he.SpringMini.aop.framework.proxy.AopProxy;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
@@ -12,7 +14,7 @@ import java.lang.reflect.Method;
  * @Date 2021/9/9 10:55 上午
  * @Version 1.0
  */
-public class CglibToAopProxy implements AopProxy{
+public class CglibToAopProxy implements AopProxy {
     private final AdvisedSupport advised;
     public CglibToAopProxy(AdvisedSupport advised){
         this.advised = advised;

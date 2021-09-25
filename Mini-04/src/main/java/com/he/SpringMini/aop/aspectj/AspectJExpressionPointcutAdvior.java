@@ -1,6 +1,6 @@
 package com.he.SpringMini.aop.aspectj;
 
-import com.he.SpringMini.aop.Pointcut;
+import com.he.SpringMini.aop.filter.Pointcut;
 import com.he.SpringMini.aop.PointcutAdvisor;
 import org.aopalliance.aop.Advice;
 

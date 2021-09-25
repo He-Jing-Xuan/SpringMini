@@ -1,6 +1,8 @@
-package com.he.SpringMini.aop.framework;
+package com.he.SpringMini.aop.framework.proxy;
 
 import com.he.SpringMini.aop.AdvisedSupport;
+import com.he.SpringMini.aop.framework.ReflectiveMethodInvocation;
+import com.he.SpringMini.aop.framework.proxy.AopProxy;
 import org.aopalliance.intercept.MethodInterceptor;
 
 import java.lang.reflect.InvocationHandler;
@@ -19,11 +21,12 @@ public class JdkDynamicAopProxy implements AopProxy, InvocationHandler {
     public JdkDynamicAopProxy(AdvisedSupport support){
         this.advised = support;
     }
+    // 获取代理对象
     @Override
     public Object getProxy() {
         return Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(),advised.getTargetSource().getTargetClass(),this);
     }
-
+    //执行代理方法
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if(advised.getMethodMatcher().matches(method,advised.getTargetSource().getClass().getClass())){

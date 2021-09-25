@@ -1,4 +1,4 @@
-package com.he.SpringMini.aop.framework;
+package com.he.SpringMini.aop.framework.proxy;
 
 /**
  * @Author he-jing-xuan
