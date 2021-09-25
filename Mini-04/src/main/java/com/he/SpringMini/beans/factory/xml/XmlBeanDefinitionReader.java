@@ -82,7 +82,10 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         Document doc = saxReader.read(inputStream);
         Element root = doc.getRootElement();
 
+
+        // 解析 context:component-scan 标签，扫描包中的类并提取相关信息，用于组装 BeanDefinition
         Element compontScan = root.element("component-scan");
+        // 处理包扫描
         if(compontScan != null){
             String scanPath = compontScan.attributeValue("base-package");
             if(StrUtil.isEmpty(scanPath)){

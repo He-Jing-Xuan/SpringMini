@@ -24,19 +24,41 @@ public class AutowiredAnnotationBeanPostProcessor implements InstantiationAwareB
     }
     @Override
     public PropertyValues postProcessPropertyValues(PropertyValues pvs, Object bean, String beanName) throws BeanException {
+        // 1. 处理注解 @Value
         Class<?> clazz = bean.getClass();
         clazz = ClassUtils.isCglibProxyClass(clazz) ? clazz.getSuperclass():clazz;
         Field[] declaredFileds = clazz.getDeclaredFields();
         for(Field field :declaredFileds){
             Value valueAnnotation = field.getAnnotation(Value.class);
+            //获取属性注解的值， 并填充属性
             if(valueAnnotation != null){
                 String value = valueAnnotation.value();
-                //value = beanFactory.resolveEmbeddedValue(value);
+                value = beanFactory.resolveEmbeddedValue(value);
                 BeanUtil.setFieldValue(bean, field.getName(), value);
 
             }
         }
-        return null;
+        // 2. 处理注解 @Autowired
+        for (Field field : declaredFileds) {
+
+            Autowired autowiredAnnotation = field.getAnnotation(Autowired.class);
+            // 处理 对象属性填充
+            if (null != autowiredAnnotation) {
+                Class<?> fieldType = field.getType();
+                String dependentBeanName = null;
+                Qualifier qualifierAnnotation = field.getAnnotation(Qualifier.class);
+                Object dependentBean = null;
+                if (null != qualifierAnnotation) {
+                    dependentBeanName = qualifierAnnotation.value();
+                    dependentBean = beanFactory.getBean(dependentBeanName, fieldType);
+                } else {
+                    dependentBean = beanFactory.getBean(fieldType);
+                }
+                BeanUtil.setFieldValue(bean, field.getName(), dependentBean);
+            }
+        }
+
+        return pvs;
 
     }
 
@@ -55,6 +77,10 @@ public class AutowiredAnnotationBeanPostProcessor implements InstantiationAwareB
         return null;
     }
 
+    @Override
+    public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeanException {
+        return false;
+    }
 
 
 }

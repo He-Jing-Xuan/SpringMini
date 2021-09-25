@@ -15,6 +15,7 @@ import java.util.Set;
  * 对象扫描装配
  */
 public class ClassPathSacnningCandidateComponentProvider {
+    //获取加了compont注解的类， 并生成BeanDefinition
     public Set<BeanDefinition> findCandidateComponents(String bassPackage){
         Set<BeanDefinition> candidates = new LinkedHashSet<>();
         // 获取到 加了注解的类
